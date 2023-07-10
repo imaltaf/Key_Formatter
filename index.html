@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button.copy-btn {
+            margin-top: 10px;
+            background-color: #2196f3;
+        }
+
+        p.output-key {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f5f5f5;
+            font-family: monospace;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Key Formatter</h1>
+        <input type="text" id="inputKey" placeholder="Enter key">
+        <button onclick="removeColons()">Remove Colons</button>
+        <p id="outputKey" class="output-key"></p>
+        <button onclick="copyKey()" class="copy-btn">Copy</button>
+        <button onclick="resetFields()">Reset</button>
+    </div>
+
+    <script>
+        function removeColons() {
+            var inputKey = document.getElementById('inputKey').value;
+            var outputKey = inputKey.replace(/:/g, ''); // Remove colons using regex
+
+            document.getElementById('outputKey').textContent = outputKey;
+        }
+
+        function copyKey() {
+            var outputKey = document.getElementById('outputKey');
+            var tempInput = document.createElement('input');
+            tempInput.value = outputKey.textContent;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            alert('Copied to clipboard!');
+        }
+
+        function resetFields() {
+            document.getElementById('inputKey').value = '';
+            document.getElementById('outputKey').textContent = '';
+        }
+    </script>
+</body>
+</html>
